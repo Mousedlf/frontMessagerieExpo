@@ -1,7 +1,7 @@
 import {
     Avatar, AvatarFallbackText,
     Box,Button,ButtonText, HStack, Icon, Input, InputField,
-    Menu, MenuItem, MenuItemLabel, Text, ThreeDotsIcon,ToastDescription, ToastTitle, VStack, CloseIcon
+    Menu, MenuItem, MenuItemLabel, Text, ThreeDotsIcon,ToastDescription, ToastTitle, VStack
 } from "@gluestack-ui/themed";
 import {Link, useLocalSearchParams} from "expo-router";
 import {FlatList, StyleSheet} from "react-native";
@@ -11,7 +11,6 @@ import axiosPrepared from "@/app/auth/interceptor";
 import {Message} from "@/app/interfaces/Message";
 import Moment from 'moment';
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import {GroupConv} from "@/app/interfaces/GroupConv";
 
 
 export default function PrivateId() {
@@ -162,7 +161,7 @@ export default function PrivateId() {
                 <Input
                     variant="rounded"
                     size="md"
-                    borderWidth="0"
+                    borderWidth="$0"
                     width="80%"
                 >
                     <InputField

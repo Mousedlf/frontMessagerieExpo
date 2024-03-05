@@ -13,15 +13,39 @@ export default function chose(){
         <VStack>
 
 
-            <VStack mt='$5'>
-                <Link href="../../(pages)/profiles">
-                    <LinkText>all profiles</LinkText>
-                </Link>
+            <VStack mt='$5' p="$3" >
+                    <Link
+                        href="../../(pages)/profiles"
+                    >
+                        <Button size="lg"
+                                width="100%"
+                                backgroundColor="#815e5b"
+                                mb="$2"
+                        >
+                            <ButtonText>All profiles</ButtonText>
+                        </Button>
+
+                    </Link>
+
                 <Link href="../../(pages)/friends">
-                    <LinkText>my friends</LinkText>
+                    <Button size="lg"
+                            width="100%"
+                            backgroundColor="#815e5b"
+                            mb="$2"
+
+                    >
+                        <ButtonText>My friends</ButtonText>
+                    </Button>
                 </Link>
                 <Link href="../../(pages)/requests">
-                    <LinkText>friend requests</LinkText>
+                    <Button size="lg"
+                            width="100%"
+                            backgroundColor="#815e5b"
+                            mb="$2"
+
+                    >
+                        <ButtonText>Friend requests</ButtonText>
+                    </Button>
                 </Link>
 
             </VStack>

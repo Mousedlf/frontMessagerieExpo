@@ -72,7 +72,7 @@ export default function Requests(){
                             </Button>
                             <Button
                                 variant="outline"
-                                color ="#815e5b"
+                                backgroundColor ="#815e5b"
                                 onPress={()=>{declineRequest(item.id)}}>
                                 <ButtonText>
                                     Decline
