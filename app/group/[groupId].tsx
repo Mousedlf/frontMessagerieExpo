@@ -30,7 +30,7 @@ export default function PrivateId() {
             .catch((error)=> console.log(error))
     }
 
-    async function deleteMessage(groupId:number, id:number){
+    async function deleteMessage(id:number){
          await axiosPrepared.delete(Globals.baseUrl+"group/"+groupId+"/delete/"+id)
             .then((response)=>{
                 console.log('message '+ id + " deleted")
@@ -137,7 +137,7 @@ export default function PrivateId() {
                                         <MenuItem key="Delete" textValue="Delete" >
                                                 <Button
                                                     variant="link"
-                                                    onPress={()=>   deleteMessage(groupId, item.id)}>
+                                                    onPress={()=>   deleteMessage(item.id)}>
                                                     <ButtonText color="#E94F37" size="sm">Delete</ButtonText>
                                                 </Button>
 

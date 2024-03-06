@@ -83,22 +83,14 @@ export default function GroupConversations(){
                                             <Text>date</Text>
 */}
                                         </HStack>
-
                                     </Link>
                                 </Box>
-
-
-
                               </HStack>
-
-
                           </VStack>
-
-
                       )}
             />
-
         </Box>
+
     )
 
 }

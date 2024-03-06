@@ -68,7 +68,6 @@ export default function login() {
                         <Input>
                             <InputField
                                 type={showPassword ? "text" : "password"}
-                                secureTextEntry={true}
                                 value={password}
                                 onChangeText={text => setPassword((text))}
                             />
