@@ -40,12 +40,11 @@ export default function Profiles(){
         return axiosPrepared.get(Globals.baseUrl+currentUser.id+"/friends")
             .then((response) => {
                setFriends(response.data)
-                console.log(response.data)
                 friends.forEach((friend:Profile)=>{
-                   // console.log(friend.id)
                     friendIds.push(friend.id)
+                    console.log(friendIds)
                 })
-               // console.log(friendIds)
+                console.log(friendIds)
 
             })
     }
@@ -73,7 +72,7 @@ export default function Profiles(){
             </HStack>
 
             <FlatList
-                data={profiles}
+                data={profiles.sort((a, b) => a.username.localeCompare(b.username))}
                 renderItem={ ({item}:{item:Profile})=>
                     <>
                         <HStack style={styles.display}>

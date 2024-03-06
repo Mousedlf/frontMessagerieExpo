@@ -58,7 +58,7 @@ export default function PrivateConversations(){
 
                                     <HStack>
                                         <VStack >
-                                            {item.participantA.username == actualUser.username ? <Text color="black" size="lg" bold={true}>{item.participantB.username}</Text> : <Text>{item.participantA.username}</Text>}
+                                            {item.participantA.username == actualUser.username ? <Text color="black" size="lg" bold={true}>{item.participantB.username}</Text> : <Text color="black" size="lg" bold={true}>{item.participantA.username}</Text>}
 
                                         </VStack>
 

@@ -109,7 +109,7 @@ export default function PrivateId() {
                 mt="$3"
             >
                 <Link href="/tabs/(tabs)/group-conversations" >
-                    <FontAwesome size={25} name={'chevron-left'} color="black   " />
+                    <FontAwesome size={25} name={'chevron-left'} color="black" />
                 </Link>
             </HStack>
 
@@ -118,16 +118,15 @@ export default function PrivateId() {
             >
 
                 <FlatList
-                    data={groupMessages}
-
-
+                    data={groupMessages.sort((a, b) => a.createdAt.localeCompare(b.createdAt))}
+                    maxHeight="95%"
+                    style={styles.test}
                     renderItem={({item}: { item: Message; }) => (
                         <>
 
                             <HStack
-                                my='$2'
+                                my='$2'np
                                 maxWidth="100%"
-
                                 {...item.author.username == currentUser.username ? styles.left : styles.right  }
                             >
 
@@ -209,8 +208,10 @@ export default function PrivateId() {
                                                         </Input>
                                                     </ModalBody>
                                                     <ModalFooter>
-                                                        <Button onPress={() => editMessage(item.id)}>
-                                                            <FontAwesome size={20} name={'paper-plane'} color="white"/>
+                                                        <Button onPress={() => editMessage(item.id)}
+                                                                backgroundColor="#f2bb05"
+                                                        >
+                                                            <FontAwesome size={20} name={'paper-plane'} color="black"/>
                                                         </Button>
                                                     </ModalFooter>
                                                 </ModalContent>
@@ -292,7 +293,11 @@ const styles = StyleSheet.create({
     },
     box:{
         height: "90%"
+    },
+    test:{
+        flexDirection: "column-reverse"
     }
+
 
 
 })

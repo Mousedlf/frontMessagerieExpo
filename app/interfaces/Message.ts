@@ -5,6 +5,7 @@ export interface Message {
     author: Profile
     content: string
     createdAt: string
+    isEdited: boolean
     reactions: any
     images: any
 }

@@ -13,6 +13,7 @@ import {
   VStack
 } from "@gluestack-ui/themed";
 import {EyeIcon, EyeOffIcon} from "lucide-react-native";
+import {StyleSheet} from "react-native";
 
 
 export default function Register() {
@@ -39,15 +40,9 @@ export default function Register() {
 
 
   return (
-      <FormControl
-          p="$4"
-          borderWidth="$1"
-          borderRadius="$lg"
-          borderColor="$borderLight300"
-          $dark-borderWidth="$1"
-          $dark-borderRadius="$lg"
-          $dark-borderColor="$borderDark800"
-      >
+      <FormControl p="$4" height="100%" style={style.jcCenter}>
+        <Text size="2xl" bold={true} mb="$20" style={style.center} color="black">waxwing</Text>
+
         <VStack space="xl">
           <VStack space="xs">
             <Text color="$text500" lineHeight="$xs">
@@ -89,12 +84,13 @@ export default function Register() {
               </InputSlot>
             </Input>
           </VStack>
-          <Button ml="auto" onPress={register}>
-            <ButtonText>Register</ButtonText>
+          <Button ml="auto" onPress={register}
+                  width="100%" mt='$5' backgroundColor="#F2BB05">
+            <ButtonText color="black">Register</ButtonText>
           </Button>
         </VStack>
-        <VStack mt='$5'>
-          <Text>Already have an account</Text>
+        <VStack mt='$10'>
+          <Text>Already have an account?</Text>
           <Link href="/login">
             <LinkText>Log in here</LinkText>
           </Link>
@@ -102,3 +98,14 @@ export default function Register() {
       </FormControl>
   );
 }
+
+
+const style = StyleSheet.create({
+  jcCenter: {
+    justifyContent: "center"
+  },
+  center: {
+    textAlign: "center"
+  }
+})
+
