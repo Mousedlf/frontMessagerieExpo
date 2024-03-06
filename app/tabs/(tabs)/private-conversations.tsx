@@ -37,6 +37,8 @@ export default function PrivateConversations(){
             <FlatList
                 data={privateConvs}
                 renderItem={({item}:{item:PrivConv}) => (
+
+
                     <Card  size="md" variant="elevated" m="$2">
                         <HStack style={styles.cardConvs}>
                             {item.participantA.username == actualUser.username ? <Heading>{item.participantB.username}</Heading> : <Heading>{item.participantA.username}</Heading>}

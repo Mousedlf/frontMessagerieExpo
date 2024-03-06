@@ -44,13 +44,14 @@ export default function Profiles(){
     }
 
     const notBefriendedProfiles = ()=> {
-        const [notFriends, setNotFriends] = useState<Profile[]>([])
+        //const [notFriends, setNotFriends] = useState<Profile[]>([])
 
 
     }
 
     useEffect(() => {
         getProfilesFromAPI()
+        getFriendsFromAPI()
     }, []);
 
 
@@ -61,11 +62,13 @@ export default function Profiles(){
             <HStack
                 backgroundColor="white"
                 p="$4"
+                mt="$6"
+
             >
                 <Link href="/tabs/(tabs)/profile" >
-                    <FontAwesome size={25} name={'chevron-left'} color="#815e5b" />
+                    <FontAwesome size={25} name={'chevron-left'} color="black" />
                 </Link>
-                <Text size="md" color="#815e5b" pl="$6" bold={true}>All profiles</Text>
+                <Text size="md" color="black" pl="$6" bold={true}>All profiles</Text>
             </HStack>
 
             <FlatList
@@ -75,13 +78,16 @@ export default function Profiles(){
                         <HStack style={styles.display}>
                             <Text>{item.username}</Text>
                             <Text>{item.public.valueOf()}</Text>
-                            <Button onPress={()=>{sendRequest(item.id)}}>
+                            <Button
+                                backgroundColor="#5e503f"
+                                onPress={()=>{sendRequest(item.id)}}
+                            >
                                 <ButtonText>
                                     Send request
                                 </ButtonText>
                             </Button>
                         </HStack>
-                        <Divider my="$4"/>
+                        <Divider my="$4" />
 
                     </>
 
@@ -96,7 +102,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         marginHorizontal: 8,
         alignItems: "center",
-        marginTop: 4
+        marginTop: 4,
     }
 
 })

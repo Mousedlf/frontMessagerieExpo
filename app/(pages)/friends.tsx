@@ -36,11 +36,13 @@ export default function Friends(){
             <HStack
                 backgroundColor="white"
                 p="$4"
+                mt="$6"
+
             >
                 <Link href="/tabs/(tabs)/profile" >
-                    <FontAwesome size={25} name={'chevron-left'} color="#815e5b" />
+                    <FontAwesome size={25} name={'chevron-left'} color="black" />
                 </Link>
-                <Text size="md" color="#815e5b" pl="$6" bold={true}>My friends</Text>
+                <Text size="md" color="black" pl="$6" bold={true}>My friends</Text>
             </HStack>
 
             <FlatList

@@ -13,40 +13,25 @@ export default function chose(){
         <VStack>
 
 
-            <VStack mt='$5' p="$3" >
-                    <Link
-                        href="../../(pages)/profiles"
-                    >
-                        <Button size="lg"
-                                width="100%"
-                                backgroundColor="#815e5b"
-                                mb="$2"
-                        >
-                            <ButtonText>All profiles</ButtonText>
-                        </Button>
-
-                    </Link>
-
-                <Link href="../../(pages)/friends">
-                    <Button size="lg"
-                            width="100%"
-                            backgroundColor="#815e5b"
-                            mb="$2"
-
-                    >
-                        <ButtonText>My friends</ButtonText>
-                    </Button>
-                </Link>
-                <Link href="../../(pages)/requests">
-                    <Button size="lg"
-                            width="100%"
-                            backgroundColor="#815e5b"
-                            mb="$2"
-
-                    >
-                        <ButtonText>Friend requests</ButtonText>
-                    </Button>
-                </Link>
+            <VStack mt='$5'
+                    p="$3"
+                    width="100%"
+            >
+                <Button size="xl"
+                        backgroundColor="#f2bb05"
+                        mb="$3">
+                    <Link href="../../(pages)/profiles">All profiles</Link>
+                </Button>
+                <Button size="xl"
+                        backgroundColor="#f2bb05"
+                        mb="$3">
+                    <Link href="../../(pages)/friends">My friends</Link>
+                </Button>
+                <Button size="xl"
+                        backgroundColor="#f2bb05"
+                        mb="$3">
+                    <Link href="../../(pages)/requests">Friend requests</Link>
+                </Button>
 
             </VStack>
 

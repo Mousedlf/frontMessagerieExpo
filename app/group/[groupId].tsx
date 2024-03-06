@@ -68,22 +68,32 @@ export default function PrivateId() {
 
     return (
         <>
-            <HStack>
-                <Link href="/tabs/(tabs)/group-conversations">arrow</Link>
-                <Text>lalaal</Text>
+            <HStack
+                backgroundColor="white"
+                p="$4"
+                mt="$3"
+            >
+                <Link href="/tabs/(tabs)/group-conversations" >
+                    <FontAwesome size={25} name={'chevron-left'} color="black   " />
+                </Link>
             </HStack>
+
             <Box p="$2"
-                 style={styles.box}>
+                 style={styles.box}
+            >
 
                 <FlatList
                     data={groupMessages}
+                    maxWidth="100%"
 
                     renderItem={({item}: { item: Message; }) => (
                         <>
 
                             <HStack
                                 my='$2'
-                                {...item.author.username == currentUser.username ? styles.left : styles.input  }
+                                maxWidth="100%"
+
+                                // {...item.author.username == currentUser.username ? styles.left : styles.input  }
                             >
 
                                 <Avatar
@@ -94,11 +104,12 @@ export default function PrivateId() {
                                 </Avatar>
 
                                 <Box
-                                    backgroundColor="white"
                                     mx="$2"
                                     py="$2"
                                     px="$3"
                                     style={styles.test}
+                                    {...item.author.username == currentUser.username ? styles.me : styles.other  }
+
                                 >
                                     <VStack >
                                         <ToastTitle>{item.author.username[0].toUpperCase() + item.author.username.slice(1)}</ToastTitle>
@@ -159,22 +170,19 @@ export default function PrivateId() {
             </Box>
             <HStack style={styles.input}>
                 <Input
-                    variant="rounded"
+                    variant="outline"
                     size="md"
-                    borderWidth="$0"
                     width="80%"
                 >
                     <InputField
                         value={content}
                         onChangeText={text => setContent(text)}
                         type="text"
-                        backgroundColor="white"
-                        border="none"
                         placeholder="Aa"
                     />
 
                 </Input>
-                <Button onPress={newMessage} backgroundColor="transparent" p="$3">
+                <Button onPress={newMessage} backgroundColor="white" pt="$3">
                     <FontAwesome size={20} name={'paper-plane'} color="#E94F37"/>
                 </Button>
 
@@ -190,23 +198,26 @@ const styles = StyleSheet.create({
        flexDirection: "row-reverse",
     },
     me: {
-       backgroundColor: "#815e5b"
+       backgroundColor: "#e2dadb" /**/
     },
     other: {
-        backgroundColor: "#DBAD6A"
+        backgroundColor: "blue"
 
     },
     test: {
-        borderRadius: 4
+        borderRadius: 4,
     },
     input:{
         position: "absolute",
         bottom:10,
         width: "100%",
         marginLeft: 6,
+        marginTop: 2,
+        backgroundColor:"white",
+        paddingTop: 5
     },
     box:{
-        height: "92%"
+        height: "90%"
     }
 
 

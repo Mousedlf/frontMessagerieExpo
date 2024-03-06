@@ -42,7 +42,7 @@ export default function TabLayout() {
     <Tabs.Screen
         name="profile"
         options={{
-        //    title: `Hello ${Globals.actualUser.username}`,
+            title: `Hello ${Globals.actualUser.username}`,
             tabBarIcon: ({ color }) => <FontAwesome size={25} name={'user'} />,
             tabBarShowLabel: false
         }}
