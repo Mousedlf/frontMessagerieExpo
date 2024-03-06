@@ -15,6 +15,7 @@ export default function GroupConversations(){
 
     const [groupChats, setGroupChats] = useState<GroupConv[]>([])
     const [lastMessage, setLastMessage] = useState<Message>()
+    const currentUser = Globals.actualUser
 
    async function getGroupConversations(){
         await axiosPrepared.get(Globals.baseUrl+"group/conversations")
@@ -63,8 +64,11 @@ export default function GroupConversations(){
                           <VStack>
                               <HStack py='$4' px='$2' style={style.center}>
 
-                                  <Avatar bgColor='#F2BB05' size="md" borderRadius="$full" >
-                                      <AvatarFallbackText >X</AvatarFallbackText>
+                                  <Avatar
+                                      size="md"
+                                      bgColor='#F2BB05'
+                                      borderRadius="$full" >
+                                      <AvatarFallbackText>X</AvatarFallbackText>
                                   </Avatar>
 
                                 <Box px="$4">

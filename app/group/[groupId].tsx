@@ -1,7 +1,23 @@
 import {
-    Avatar, AvatarFallbackText,
-    Box,Button,ButtonText, HStack, Icon, Input, InputField,
-    Menu, MenuItem, MenuItemLabel, Text, ThreeDotsIcon,ToastDescription, ToastTitle, VStack
+    Avatar,
+    AvatarFallbackText,
+    Box,
+    Button,
+    ButtonText, CloseIcon, Heading,
+    HStack,
+    Icon,
+    Input,
+    InputField,
+    Menu,
+    MenuItem,
+    MenuItemLabel, Modal,
+    ModalBackdrop, ModalBody, ModalCloseButton,
+    ModalContent, ModalFooter, ModalHeader,
+    Text,
+    ThreeDotsIcon,
+    ToastDescription,
+    ToastTitle,
+    VStack
 } from "@gluestack-ui/themed";
 import {Link, useLocalSearchParams} from "expo-router";
 import {FlatList, StyleSheet} from "react-native";
@@ -18,6 +34,10 @@ export default function PrivateId() {
     const currentUser = Globals.actualUser
     const [groupMessages, setGroupMessages] = useState<Message[]>([])
     const [content, setContent] = useState("")
+
+    const [showModal, setShowModal] = useState(false)
+    const ref = React.useRef(null)
+    const [editContent, setEditContent] = useState("")
 
 
     async function getMessages() {
@@ -42,7 +62,6 @@ export default function PrivateId() {
         if(content == ""){
             return console.log("rien")
         }
-
         await axiosPrepared.post(Globals.baseUrl+"group/message/in/"+ groupId, {
             content: content,
             associatedImages: []
@@ -52,18 +71,34 @@ export default function PrivateId() {
                 setContent("")
                 getMessages()
             })
-
     }
 
-    const editMessage = (groupId:number, id:number)=>{
-        return axiosPrepared.put(Globals.baseUrl+"group/"+groupId+"/edit/"+id)
+    async function editMessage(messageId: number) {
+        await axiosPrepared.put(Globals.baseUrl+"group/"+groupId+"/edit/"+messageId, {
+            content: editContent
+        })
+            .then((response) => {
+                console.log(response.data)
+            })
+        setEditContent("")
+        setShowModal(false)
+        getMessages()
     }
+
+    function showModalWithContent(messageContent: string) {
+        console.log(messageContent)
+        setShowModal(true)
+        setEditContent(messageContent)
+    }
+
+
 
     Moment.locale('fr');
 
     useEffect(() => {
         getMessages()
     }, []);
+
 
 
     return (
@@ -84,7 +119,7 @@ export default function PrivateId() {
 
                 <FlatList
                     data={groupMessages}
-                    maxWidth="100%"
+
 
                     renderItem={({item}: { item: Message; }) => (
                         <>
@@ -93,7 +128,7 @@ export default function PrivateId() {
                                 my='$2'
                                 maxWidth="100%"
 
-                                // {...item.author.username == currentUser.username ? styles.left : styles.input  }
+                                {...item.author.username == currentUser.username ? styles.left : styles.right  }
                             >
 
                                 <Avatar
@@ -107,7 +142,7 @@ export default function PrivateId() {
                                     mx="$2"
                                     py="$2"
                                     px="$3"
-                                    style={styles.test}
+                                    style={styles.message}
                                     {...item.author.username == currentUser.username ? styles.me : styles.other  }
 
                                 >
@@ -142,7 +177,44 @@ export default function PrivateId() {
                                     >
                                         <MenuItem key="Edit" textValue="Edit">
 
-                                            <MenuItemLabel size='sm'>Edit</MenuItemLabel>
+                                            <Button
+                                                variant="link"
+                                                onPress={()=>   showModalWithContent(item.content)}>
+                                                <ButtonText color="black" size="sm">Modify</ButtonText>
+                                            </Button>
+                                            <Modal
+                                                isOpen={showModal}
+                                                onClose={() => {
+                                                    setShowModal(false)
+                                                }}
+                                                finalFocusRef={ref}
+                                            >
+                                                <ModalBackdrop />
+                                                <ModalContent>
+                                                    <ModalHeader>
+                                                        <Heading size="lg">Edit message</Heading>
+                                                        <ModalCloseButton>
+                                                            <Icon as={CloseIcon} />
+                                                        </ModalCloseButton>
+                                                    </ModalHeader>
+                                                    <ModalBody>
+                                                        <Input
+                                                            variant="rounded"
+                                                        >
+                                                            <InputField
+                                                                placeholder="Enter Text here"
+                                                                value={editContent}
+                                                                onChangeText={text => setEditContent(text)}
+                                                                type="text"/>
+                                                        </Input>
+                                                    </ModalBody>
+                                                    <ModalFooter>
+                                                        <Button onPress={() => editMessage(item.id)}>
+                                                            <FontAwesome size={20} name={'paper-plane'} color="white"/>
+                                                        </Button>
+                                                    </ModalFooter>
+                                                </ModalContent>
+                                            </Modal>
                                         </MenuItem>
 
                                         <MenuItem key="Delete" textValue="Delete" >
@@ -183,7 +255,7 @@ export default function PrivateId() {
 
                 </Input>
                 <Button onPress={newMessage} backgroundColor="white" pt="$3">
-                    <FontAwesome size={20} name={'paper-plane'} color="#E94F37"/>
+                    <FontAwesome size={20} name={'paper-plane'} color="black"/>
                 </Button>
 
             </HStack>
@@ -198,14 +270,16 @@ const styles = StyleSheet.create({
        flexDirection: "row-reverse",
     },
     me: {
-       backgroundColor: "#e2dadb" /**/
+       backgroundColor: "#e2dadb" /**/,
+        justifyContent: "flex-end"
     },
     other: {
-        backgroundColor: "blue"
+        backgroundColor: "#e2dadb"
 
     },
-    test: {
+    message: {
         borderRadius: 4,
+        maxWidth: "80%"
     },
     input:{
         position: "absolute",

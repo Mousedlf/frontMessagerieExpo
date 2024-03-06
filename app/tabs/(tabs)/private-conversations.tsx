@@ -1,5 +1,5 @@
 import {
-    Avatar, AvatarImage,
+    Avatar, AvatarFallbackText, AvatarImage,
     Box,
     Button, ButtonText, Card,
     Divider, Heading, HStack,
@@ -7,7 +7,7 @@ import {
 } from "@gluestack-ui/themed";
 import axiosPrepared from "@/app/auth/interceptor";
 import {Globals} from "@/app/common/globals";
-import {useState} from "react";
+import React, {useState} from "react";
 import {FlatList, StyleSheet} from "react-native";
 import {PrivConv} from "@/app/interfaces/PrivConv";
 import {Link, router} from "expo-router";
@@ -33,32 +33,50 @@ export default function PrivateConversations(){
    getPrivateConversations()
 
     return(
-        <Box py="$10">
+        <Box mt="$1">
             <FlatList
                 data={privateConvs}
                 renderItem={({item}:{item:PrivConv}) => (
 
+                    <VStack>
+                        <HStack py='$4' px='$2' style={style.center}>
 
-                    <Card  size="md" variant="elevated" m="$2">
-                        <HStack style={styles.cardConvs}>
-                            {item.participantA.username == actualUser.username ? <Heading>{item.participantB.username}</Heading> : <Heading>{item.participantA.username}</Heading>}
-                            <Link
-                                href={{
-                                    pathname: "/private/[privateId]",
-                                    params: { privateId: item.id }
-                                }}>
-                                VIEW
-                            </Link>
+                            <Avatar
+                                size="md"
+                                bgColor='#F2BB05'
+                                borderRadius="$full" >
+
+                                <AvatarFallbackText>X</AvatarFallbackText>
+                            </Avatar>
+
+                            <Box px="$4">
+                                <Link
+                                    href={{
+                                        pathname: "/private/[privateId]",
+                                        params: { privateId: item.id }
+                                    }}>
+
+                                    <HStack>
+                                        <VStack >
+                                            {item.participantA.username == actualUser.username ? <Text color="black" size="lg" bold={true}>{item.participantB.username}</Text> : <Text>{item.participantA.username}</Text>}
+
+                                        </VStack>
+
+                                    </HStack>
+                                </Link>
+                            </Box>
                         </HStack>
-                    </Card>
+                    </VStack>
+
                 )}
             />
         </Box>
     )
 }
 
-const styles = StyleSheet.create({
-    cardConvs: {
-        justifyContent:"space-between"
-    }
+const style = StyleSheet.create({
+    center: {
+        alignItems: "center",
+    },
+
 })

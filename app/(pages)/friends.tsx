@@ -53,7 +53,7 @@ export default function Friends(){
                             <HStack>
                                 <Avatar
 
-                                    size="sm" borderRadius="$full" >
+                                    size="sm" borderRadius="$full" backgroundColor="#F2BB05" >
                                     <AvatarFallbackText>{item.username[0]}</AvatarFallbackText>
                                 </Avatar>
                                 <Text pl="$2">{item.username}</Text>

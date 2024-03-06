@@ -16,6 +16,7 @@ export default function Profiles(){
 
     const [profiles, setProfiles] = useState<Profile[]>([])
     const [friends, setFriends] = useState<Profile[]>([])
+    const[friendIds, setFriendIds]= useState<number[]>([])
     const currentUser = Globals.actualUser
 
     const getProfilesFromAPI = () => {
@@ -38,15 +39,15 @@ export default function Profiles(){
     const getFriendsFromAPI = () => {
         return axiosPrepared.get(Globals.baseUrl+currentUser.id+"/friends")
             .then((response) => {
-                // console.log(response.data)
-                setFriends(response.data)
+               setFriends(response.data)
+                console.log(response.data)
+                friends.forEach((friend:Profile)=>{
+                   // console.log(friend.id)
+                    friendIds.push(friend.id)
+                })
+               // console.log(friendIds)
+
             })
-    }
-
-    const notBefriendedProfiles = ()=> {
-        //const [notFriends, setNotFriends] = useState<Profile[]>([])
-
-
     }
 
     useEffect(() => {
@@ -78,14 +79,16 @@ export default function Profiles(){
                         <HStack style={styles.display}>
                             <Text>{item.username}</Text>
                             <Text>{item.public.valueOf()}</Text>
+
+                            {!friendIds.includes(item.id) ?
                             <Button
-                                backgroundColor="#5e503f"
+                                backgroundColor="#F2BB05"
                                 onPress={()=>{sendRequest(item.id)}}
                             >
-                                <ButtonText>
+                                <ButtonText color="black">
                                     Send request
                                 </ButtonText>
-                            </Button>
+                            </Button>: <Text></Text>}
                         </HStack>
                         <Divider my="$4" />
 
