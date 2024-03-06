@@ -3,36 +3,9 @@ import React, {useEffect, useState} from "react";
 import axiosPrepared from "@/app/auth/interceptor";
 import {GroupConv} from "@/app/interfaces/GroupConv";
 import {
-    Box,
-    HStack,
-    Text,
-    Divider,
-    VStack,
-    Avatar,
-    AvatarFallbackText,
-    Button,
-    ButtonText,
-    ButtonIcon,
-    AddIcon,
-    ModalFooter,
-    Modal,
-    ModalBackdrop,
-    ModalContent,
-    ModalHeader,
-    Heading,
-    ModalCloseButton,
-    Icon,
-    CloseIcon,
-    ModalBody,
-    CheckboxGroup,
-    Checkbox,
-    CheckboxLabel,
-    CheckboxIndicator,
-    CheckboxIcon,
-    Menu,
-    ThreeDotsIcon,
-    MenuItem,
-    MenuItemLabel, Input, InputField,
+    Box, HStack, Text, VStack, Avatar, AvatarFallbackText, Button, ButtonText, ModalFooter,
+    Modal, ModalBackdrop, ModalContent, ModalHeader, Heading, ModalCloseButton, Icon, CloseIcon, ModalBody, CheckboxGroup, Checkbox,
+    CheckboxLabel, CheckboxIndicator, CheckboxIcon, Menu, ThreeDotsIcon, MenuItem, Input, InputField,
 } from "@gluestack-ui/themed";
 import {FlatList, StyleSheet} from "react-native";
 import {Link} from "expo-router";
@@ -169,7 +142,7 @@ export default function GroupConversations(){
                                                   <VStack>
                                                       {item.name === null ?
                                                           <Text color="black" size="lg" bold={true}>Untitled</Text> :
-                                                          <Text>{item.name}</Text>}
+                                                          <Text color="black" size="lg" bold={true}>{item.name}</Text>}
                                                       <Text>{item.lastMessage}</Text>
                                                   </VStack>
                                               </HStack>
@@ -194,7 +167,7 @@ export default function GroupConversations(){
                                       >
                                           <MenuItem key="AddMember" textValue="AddMember" >
                                               <Button onPress={() => setShowModal3(true)} variant="link">
-                                                  <ButtonText color="green" size="xl">Add Member</ButtonText>
+                                                  <ButtonText color="black" size="sm">Add Member</ButtonText>
                                               </Button>
                                               <Modal
                                                   isOpen={showModal3}
@@ -223,10 +196,9 @@ export default function GroupConversations(){
                                                       <ModalFooter>
                                                           <Button
                                                               size="sm"
-                                                              action="positive"
                                                               borderWidth="$0"
                                                           >
-                                                              <ButtonText>Add</ButtonText>
+                                                              <ButtonText color="black">Add</ButtonText>
                                                           </Button>
                                                       </ModalFooter>
                                                   </ModalContent>
@@ -235,7 +207,7 @@ export default function GroupConversations(){
 
                                           <MenuItem key="Edit" textValue="Edit">
                                               <Button onPress={() => showModalWithTitle(item.name)} variant="link">
-                                                  <ButtonText color="orange" size="xl">Edit</ButtonText>
+                                                  <ButtonText color="black" size="sm">Edit</ButtonText>
                                               </Button>
                                               <Modal
                                                   isOpen={showModal2}
@@ -274,7 +246,7 @@ export default function GroupConversations(){
 
                                           <MenuItem key="Delete" textValue="Delete" >
                                               <Button onPress={() => deleteGroupConv(item.id)} variant="link">
-                                                  <ButtonText color="#E94F37" size="xl">Delete</ButtonText>
+                                                  <ButtonText color="#E94F37" size="sm" >Delete</ButtonText>
                                               </Button>
                                           </MenuItem>
                                       </Menu>
@@ -285,8 +257,8 @@ export default function GroupConversations(){
                       )}/>
 
         </Box>
-            <Button onPress={() => setShowModal(true)} ref={ref}>
-                <ButtonText>Create new group</ButtonText>
+            <Button onPress={() => setShowModal(true)} ref={ref} backgroundColor="#f2bb05">
+                <ButtonText color="black">Create new group</ButtonText>
             </Button>
             <Modal
                 isOpen={showModal}
@@ -329,7 +301,7 @@ export default function GroupConversations(){
                     <ModalFooter>
                         <Button
                             size="sm"
-                            action="positive"
+                            backgroundColor="#f2dd05"
                             borderWidth="$0"
                             onPress={createGroupConv}
                         >

@@ -36,13 +36,12 @@ export default function Profiles(){
           .catch((error)=> console.log(error))
     }
 
-    const getFriendsFromAPI = () => {
+    async function getFriendsFromAPI(){
         return axiosPrepared.get(Globals.baseUrl+currentUser.id+"/friends")
             .then((response) => {
                setFriends(response.data)
                 friends.forEach((friend:Profile)=>{
                     friendIds.push(friend.id)
-                    console.log(friendIds)
                 })
                 console.log(friendIds)
 
@@ -87,7 +86,7 @@ export default function Profiles(){
                                 <ButtonText color="black">
                                     Send request
                                 </ButtonText>
-                            </Button>: <Text></Text>}
+                            </Button>: <Text>.</Text>}
                         </HStack>
                         <Divider my="$4" />
 

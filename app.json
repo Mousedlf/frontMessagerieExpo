@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/images/oui.jpg",
       "resizeMode": "contain",
-      "backgroundColor": "white"
+      "backgroundColor": "#F2bb05"
     },
     "assetBundlePatterns": [
       "**/*"

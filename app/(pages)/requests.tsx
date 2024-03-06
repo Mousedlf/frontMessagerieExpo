@@ -1,5 +1,6 @@
 
 import {
+    Box,
     Button, ButtonText,
     Divider, HStack,
     Text, VStack,
@@ -20,11 +21,12 @@ export default function Requests(){
         return  axiosPrepared.get(Globals.baseUrl+"friend/request/received/"+ currentUser.id)
             .then((response) => {
                 setRequests(response.data)
+                console.log((response.data))
             })
             .catch((error)=> console.log(error))
     }
 
-    const acceptRequest = async (id:number)=>{
+    async function acceptRequest(id:number){
         console.log(Globals.baseUrl+"friend/request/accept/"+ id)
         return await axiosPrepared.post(Globals.baseUrl+"friend/accept/"+ id)
             .then((response) => {
@@ -33,8 +35,8 @@ export default function Requests(){
             .catch((error)=> console.log(error))
     }
 
-    const declineRequest = (id:number)=>{
-        return axiosPrepared.get(Globals.baseUrl+"friend/decline/"+ id)
+    async function declineRequest(id:number){
+        return axiosPrepared.post(Globals.baseUrl+"friend/decline/"+ id)
             .then((response) => {
                 console.log('declined')
             })
@@ -62,23 +64,28 @@ export default function Requests(){
             <FlatList
                 data={requests}
                 renderItem={ ({item}:{item:Request})=>
-                    <VStack>
-                        <HStack>
+                    <VStack p="$3">
+                        <HStack style={styles.jcBetween}>
                             <Text>{item.ofProfile.username}</Text>
-                            <Button
-                                onPress={()=>{acceptRequest(item.id)}}>
-                                <ButtonText>
-                                    Accept
-                                </ButtonText>
-                            </Button>
-                            <Button
-                                variant="outline"
-                                backgroundColor ="#815e5b"
-                                onPress={()=>{declineRequest(item.id)}}>
-                                <ButtonText>
-                                    Decline
-                                </ButtonText>
-                            </Button>
+                            <HStack>
+                                <Button
+                                    onPress={()=>{acceptRequest(item.id)}}
+                                    backgroundColor="#f2bb05">
+                                    <ButtonText color="black">
+                                        Accept
+                                    </ButtonText>
+                                </Button>
+                                <Button
+                                    variant="outline"
+                                    ml="$1"
+                                    borderColor="#f2dD05"
+                                    onPress={()=>{declineRequest(item.id)}}>
+                                    <ButtonText color="black">
+                                        Decline
+                                    </ButtonText>
+                                </Button>
+                            </HStack>
+
 
                         </HStack>
                         <Divider my="$4"/>
@@ -91,5 +98,7 @@ export default function Requests(){
 }
 
 const styles = StyleSheet.create({
-
+    jcBetween: {
+        justifyContent: "space-between"
+    }
 })
